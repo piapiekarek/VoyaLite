@@ -1,0 +1,487 @@
+meta:
+  engine: 4.1.0
+  name: ergogen-footprints-demo
+  version: 0.1
+  ref: &kb_ref "Ergogen Footprints Demo v0.1 (by ceoloide)"
+  url: &kb_url "https://github.com/ceoloide/ergogen-footprints"
+units:  
+  # Physical measures
+  screw_radius: 1.1 # M2 screws
+  screw_diameter: screw_radius * 2
+  spacer_radius: 2.15 # M2 standoffs
+  spacer_diameter: spacer_radius * 2
+  fillet_radius: 0.5
+points:
+  zones:
+    board_center:
+      anchor:
+        shift: [100, -100] # Fix KiCad placement
+        # rotate: -45 # Test footprint rotations
+      key:
+        tags:
+          - helper
+    choc_v1_v2:
+      key:
+        padding: u
+        spread: u
+        tags:
+          - key
+      anchor:
+        - ref: board_center
+          shift: [-2u,-2u]
+      columns:
+        c1:
+        c2:
+        c3:
+        c4:
+        c5:
+      # Rows are populated bottom-to-top, so we invert the order to have
+      # top-to-bottom
+      rows:
+        r5: 
+        r4:
+        r3:
+        r2:
+        r1:
+  mirror:
+    ref: board_center
+    distance: 135
+
+outlines:
+  board_outline:
+    - what: rectangle
+      where: /board_center/
+      size: [u * 5,u * 5]
+      fillet: fillet_radius
+  keys:
+    - what: rectangle
+      where: /key/
+      size: [u,u]
+      operation: stack
+  keycaps:
+    - what: rectangle
+      where: -/_c[3-5]|helper/
+      size: [18,18]
+      fillet: fillet_radius
+  nice_nano_pcb:
+    - what: rectangle
+      where: board_center
+      size: [18,34]
+      # fillet: fillet_radius
+      adjust:
+        shift: [0,-34/2 + 2.5 u]
+  preview:
+    - what: outline
+      name: board_outline
+    - what: rectangle
+      where: /key/
+      size: [6,0.01]
+      operation: stack
+    - what: rectangle
+      where: /key/
+      size: [0.01,4]
+      operation: stack
+    - what: rectangle
+      size: [u,u]
+      where: /key/
+      operation: stack
+    - what: outline
+      name: keycaps
+      operation: stack
+    - what: outline
+      name: nice_nano_pcb
+      operation: stack
+
+pcbs:
+  ergogen_footprints_demo:
+    template: kicad8
+    # references: true
+    outlines:
+      main:
+        outline: board_outline
+      keys:
+        outline: keys
+        layer: Eco1.User
+      keycaps:
+        outline: keycaps
+        layer: Eco2.User
+    footprints:
+      switch_1_1:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c1_r1/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: true
+          solder: false
+          include_stabilizer_pad: true
+          oval_stabilizer_pad: false
+          choc_v1_support: false
+          choc_v2_support: true
+          outer_pad_width_back: 1.8
+        adjust:
+          rotate: 180
+      switch_1_2:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c1_r2/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: true
+          solder: false
+          include_stabilizer_pad: true
+          oval_stabilizer_pad: true
+          choc_v1_support: false
+          choc_v2_support: true
+          outer_pad_width_back: 1.8
+        adjust:
+          rotate: 180
+      switch_1_3:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c1_r3/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: true
+          solder: false
+          choc_v1_support: true
+          choc_v2_support: false
+          include_choc_v1_led_cutout_marks: true
+          outer_pad_width_back: 1.8
+        adjust:
+          rotate: 180
+      switch_1_4:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c1_r4/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: true
+          solder: false
+          choc_v1_support: true
+          choc_v2_support: true
+          outer_pad_width_back: 1.8
+        adjust:
+          rotate: 180
+      switch_1_5:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c1_r5/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: true
+          solder: true
+          choc_v1_support: false
+          choc_v2_support: true
+          oval_stabilizer_pad: true
+          outer_pad_width_back: 1.8
+        adjust:
+          rotate: 180
+      switch_2_1:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c2_r1/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: false
+          solder: true
+          include_stabilizer_pad: true
+          oval_stabilizer_pad: false
+          choc_v1_support: false
+          choc_v2_support: true
+          include_plated_holes: true
+        adjust:
+          rotate: 180
+      switch_2_2:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c2_r2/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: false
+          solder: true
+          include_stabilizer_pad: true
+          oval_stabilizer_pad: true
+          choc_v1_support: false
+          choc_v2_support: true
+          include_plated_holes: true
+        adjust:
+          rotate: 180
+      switch_2_3:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c2_r3/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: false
+          solder: true
+          include_stabilizer_pad: true
+          oval_stabilizer_pad: true
+          choc_v1_support: true
+          choc_v2_support: false
+          include_plated_holes: true
+        adjust:
+          rotate: 180
+      switch_2_4:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c2_r4/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: false
+          solder: true
+          include_stabilizer_pad: true
+          oval_stabilizer_pad: false
+          choc_v1_support: true
+          choc_v2_support: true
+          include_plated_holes: true
+          include_stabilizer_nets: true
+          LEFTSTAB: "{{row}}"
+          RIGHTSTAB: "{{row}}"
+        adjust:
+          rotate: 180
+      switch_2_5:
+        what: ceoloide/switch_choc_v1_v2
+        where: /choc_v1_v2_c2_r5/
+        params:
+          from: "{{col.name}}"
+          to: "{{colrow}}"
+          reversible: true
+          hotswap: true
+          solder: false
+          choc_v1_support: false
+          choc_v2_support: true
+          include_choc_v2_led_cutout_marks: true
+          oval_stabilizer_pad: false
+          outer_pad_width_back: 1.8
+          include_plated_holes: true
+          include_centerhole_net: true
+          include_stabilizer_nets: true
+          LEFTSTAB: LED_3
+          RIGHTSTAB: LED_2
+          CENTERHOLE: GND
+        adjust:
+          rotate: 180
+
+      diodes_b:
+        what: ceoloide/diode_tht_sod123
+        where: [/choc_v1_v2_c1_.*/, /choc_v1_v2_c2_.*/]
+        params:
+          from: "{{colrow}}"
+          to: "{{row}}"
+          include_tht: false
+          reversible: false
+          side: B
+        adjust:
+          rotate: -90
+          shift: [-7.75,4.2]
+          resist: true
+
+      diodes_f:
+        what: ceoloide/diode_tht_sod123
+        where: [/choc_v1_v2_c1/, /choc_v1_v2_c2/]
+        params:
+          from: "{{colrow}}"
+          to: "{{row}}"
+          include_tht: false
+          reversible: false
+          side: F
+        adjust:
+          rotate: -90
+          shift: [8.25,4.2]
+          resist: true
+
+      mounting_hole_1:
+        what: ceoloide/mounting_hole_npth
+        where: /choc_v1_v2_c2_r[1-4]/
+        params:
+          hole_size: spacer_diameter + 0.8
+          hole_drill: spacer_diameter
+        adjust:
+          shift: [-u / 2,-u / 2]
+          
+      per_key_led_1:
+        what: ceoloide/led_sk6812mini-e
+        where: /choc_v1_v2_c1_r2/
+        params:
+          P1: VCC
+          P2: LED_U_1 # DOUT
+          P3: GND
+          P4: LED # DIN
+          side: B
+          reversible: true
+          reverse_mount: true
+          include_traces_vias: false
+          include_courtyard: false
+        adjust:
+          shift: [0, 4.7]
+          
+      per_key_led_2:
+        what: ceoloide/led_sk6812mini-e
+        where: /choc_v1_v2_c1_r3/
+        params:
+          P1: VCC
+          P2: LED_3 # DOUT
+          P3: GND
+          P4: LED_2 # DIN
+          reversible: true
+          reverse_mount: true
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, 4.7]
+          
+      per_key_led_3:
+        what: ceoloide/led_sk6812mini-e
+        where: /choc_v1_v2_c2_r5/
+        params:
+          P1: VCC
+          P2: LED_3 # DOUT
+          P3: GND
+          P4: LED_2 # DIN
+          reversible: true
+          reverse_mount: true
+          include_traces_vias: false
+          include_courtyard: false
+        adjust:
+          shift: [0, 4.7]
+      
+      underglow_led_1:
+        what: ceoloide/led_sk6812mini-e
+        where: /choc_v1_v2_c1_r3/
+        params:
+          P1: VCC
+          P2: LED_2 # DOUT
+          P3: GND
+          P4: LED_U_1 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, 4.7 + 4.4 - 0.75]
+      
+
+      # Physical dimensions
+      # Top of pins to end of USB-C: 3.70mm
+      # Top of pins to bottom of PCB: 30.60mm
+      # Top of USB-C to top of PCB: 0.9mm
+      nice_nano_1:
+        what: ceoloide/mcu_nice_nano
+        where: /choc_v1_v2_c2_r1/
+        params:
+          use_rectangular_jumpers: true
+          reversible: true
+          reverse_mount: true
+        adjust:
+            shift: [3u,-33/2+u/2]
+
+
+      nice_nano_2:
+        what: ceoloide/mcu_nice_nano
+        where: /choc_v1_v2_c2_r1/
+        params:
+          use_rectangular_jumpers: false
+          reversible: true
+        adjust:
+            shift: [2u,-33/2+u/2]
+
+      screw_hole_1:
+        what: ceoloide/mounting_hole_npth
+        where: /board_center/
+        params:
+          hole_size: screw_diameter
+          hole_drill: screw_diameter
+        adjust:
+            shift: [u/2 + spacer_radius,u/2 - spacer_radius]
+
+      screw_hole_2:
+        what: ceoloide/mounting_hole_npth
+        where: /board_center/
+        params:
+          hole_size: screw_diameter
+          hole_drill: screw_diameter
+        adjust:
+            shift: [u*1.5 - spacer_radius,u/2 - spacer_radius]
+
+      battery_connector_1:
+        what: ceoloide/battery_connector_jst_ph_2
+        where: /board_center/
+        params:
+          reversible: true
+          include_traces: true
+        adjust:
+          shift: [u + 1.5,1.25]
+          rotate: -90
+
+      power_switch_smd_1:
+        what: ceoloide/power_switch_smd_side
+        where: /board_center/
+        params:
+          reversible: true
+          invert_behavior: true
+        adjust:
+          shift: [u + 7.5,-1.5]
+
+      nice_nano_3:
+        what: ceoloide/mcu_nice_nano
+        where: /choc_v1_v2_c2_r1/
+        params:
+          use_rectangular_jumpers: false
+          only_required_jumpers: true
+          include_extra_pins: true
+          reversible: true
+          reverse_mount: true
+        adjust:
+            shift: [u,-33/2+u/2]
+      
+
+      power_switch_smd_2:
+        what: ceoloide/power_switch_smd_side
+        where: /board_center/
+        params:
+          reversible: false
+          invert_behavior: false
+        adjust:
+          shift: [7.5,-1.5]
+          rotate: 180
+
+
+      mounting_hole_plated_1:
+        what: ceoloide/mounting_hole_plated
+        where: /choc_v1_v2_c2_r3/
+        adjust:
+          shift: [0.5u, 0.5u]
+      
+      mounting_hole_plated_2:
+        what: ceoloide/mounting_hole_plated
+        where: /choc_v1_v2_c2_r4/
+        params:
+          drill_y: 4.4
+        adjust:
+          shift: [0.5u, 0.5u]
+          rotate: 90
+
+      point_debugger:
+        what: ceoloide/utility_point_debugger
+        where: /board_center/
+        params:
+          enabled: true
+
+      molex_pico_ezmate_1:
+        what: ceoloide/battery_connector_molex_pico_ezmate_1x02
+        where: /board_center/
+        params:
+          reversible: true
+        adjust:
+          shift: [1, -5]
+          rotate: -90

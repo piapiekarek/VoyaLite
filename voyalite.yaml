@@ -1,0 +1,691 @@
+meta:
+  engine: 4.1.0 # Min Ergogen version for KiCad 8 footprints
+units:
+  a: u
+  kx: a
+  ky: a
+
+  padding: 2
+  test_padding: padding/4
+
+  px: kx + padding
+  py: ky + padding
+
+
+  c1_dy: 0
+  c2_dy: 0
+  c3_dy: 5
+  c4_dy: 5
+  c5_dy: -5
+  c6_dy: -5
+
+  sk_dy: -4.7 - 2.4 + 0.75
+
+  highest_pt: c3_dy + c4_dy
+
+  screw_radius: 1.1 # M2 screws
+  screw_diameter: screw_radius * 2
+  spacer_radius: 2.15 # M2 standoffs
+  spacer_diameter: spacer_radius * 2
+  fillet_radius: 0.5
+
+points:
+  zones: 
+    mainmatrix:
+      key:
+        padding: ky
+        spread: kx
+      columns: 
+        c1:
+          rows.r1.skip: true
+        c2:
+          #rows.r5.skip: true
+        c3:
+          key.stagger: c3_dy
+          key.splay: 0
+        c4:
+          key.stagger: c4_dy
+        c5:
+          key.stagger: -5
+        c6:
+          key.stagger: -5
+          #rows.r5.skip: true
+      rows:
+        r5:
+        r4:
+        r3:
+        r2:
+        r1:
+      anchor:
+        shift: [100,-140]
+    thumbs:
+      key:
+        padding: ky
+        spread: kx
+      anchor:
+        ref: mainmatrix_c6_r5
+        shift: [3kx/8, -ky-4]
+      columns:
+        layer:
+          key:
+            splay: -30
+        space:
+      rows:
+        cluster:
+          #shift: [0, -ky]
+#  mirror: &mirror
+#    ref: mainmatrix_c6_r1
+#    distance: 5kx
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [px, py]
+  keys:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [kx-0.5,ky-0.5]
+  left:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: mainmatrix_c1_r2
+          shift: [-0.5px,0.5py+ky+ + highest_pt]
+
+        - ref: mainmatrix_c4_r1
+          shift: [0.5px,0.5py]
+
+        - ref: mainmatrix_c4_r1
+          shift: [0.5px, c4_dy+test_padding]
+
+        - ref: mainmatrix_c5_r1
+          shift: [0.5px, 0.5py]
+        
+        - ref: mainmatrix_c5_r1
+          shift: [0.5px, 0.5py+c5_dy]
+
+        - ref: mainmatrix_c6_r1
+          shift: [0.5px,0.5px]
+
+        - ref: mainmatrix_c6_r5
+          shift: [0.5px,-0.5py-2]
+
+        - ref: thumbs_space_cluster
+          shift: [0.5px,+0.5py]
+
+        - ref: thumbs_space_cluster
+          shift: [0.5px,-0.5py]
+        
+        - ref: thumbs_layer_cluster
+          shift: [-0.5px,-0.5py]
+        
+        - ref: thumbs_layer_cluster
+          shift: [-0.5px,0py]
+        
+        - ref: mainmatrix_c5_r5
+          shift: [-0.5kx-padding/2,-0.5py]
+        
+        - ref: mainmatrix_c3_r5
+          shift: [-0.5kx+padding/2,-0.5py]
+
+        - ref: mainmatrix_c2_r5
+          shift: [0.5px,-0.5py]
+
+        - ref: mainmatrix_c1_r5
+          shift: [-0.5px,-0.5py]
+      fillet: 2
+#  right:
+#    - what: polygon
+#      operation: stack
+#      points:
+#        - ref: mirror_mainmatrix_c1_r2
+#          shift: [-0.5px,0.5py +ky+ highest_pt]
+
+#        - ref: mirror_mainmatrix_c4_r1
+#          shift: [0.5px,0.5py]
+
+#        - ref: mirror_mainmatrix_c4_r1
+#          shift: [0.5px, c4_dy+test_padding]
+
+#        - ref: mirror_mainmatrix_c5_r1
+#          shift: [0.5px, 0.5py]
+        
+#        - ref: mirror_mainmatrix_c5_r1
+#          shift: [0.5px, 0.5py+c5_dy]
+
+#        - ref: mirror_mainmatrix_c6_r1
+#          shift: [0.5px,0.5px]
+
+#        - ref: mirror_mainmatrix_c6_r5
+#          shift: [0.5px,-0.5py]
+
+#        - ref: mirror_thumbs_space_cluster
+#          shift: [0.5px,+0.5py]
+
+#        - ref: mirror_thumbs_space_cluster
+#          shift: [0.5px,-0.5py]
+        
+#        - ref: mirror_thumbs_layer_cluster
+#          shift: [-0.5px,-0.5py]
+        
+#        - ref: mirror_thumbs_layer_cluster
+#          shift: [-0.5px,0py]
+        
+#        - ref: mirror_mainmatrix_c5_r5
+#          shift: [-0.5kx-padding/2,-0.5py]
+        
+#        - ref: mirror_mainmatrix_c3_r5
+#          shift: [-0.5kx+padding/2,-0.5py]
+
+#        - ref: mirror_mainmatrix_c2_r5
+#          shift: [0.5px,-0.5py]
+
+#        - ref: mirror_mainmatrix_c1_r5
+#          shift: [-0.5px,-0.5py]
+#      fillet: 2
+#  board:
+#    - name: left
+#    - operation: stack
+#      name: right
+  
+  combo:
+    - name: left
+    - operation: stack
+      name: keys
+
+pcbs:
+  main:
+    template: kicad8 # Required, since footprints are KiCad 8 only
+    outlines:
+      main:
+        outline: left
+    footprints:
+      mx_hotswap:
+        what: mx
+        where: true
+        params:
+          keycaps: true
+          reverse: true
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      nice_nano_1:
+        what: ceoloide/mcu_nice_nano
+        where: /mainmatrix_c1_r2/
+        params:
+          use_rectangular_jumpers: false
+          reversible: true
+          reverse_mount: false
+        adjust:
+            shift: [0,1.22ky]
+#LED Reihe 1
+      underglow_led_c2_r1:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c2_r1/
+        params:
+          P1: VCC
+          P2: LED_2 # DOUT
+          P3: GND
+          P4: LED_U_1 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c3_r1:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c3_r1/
+        params:
+          P1: VCC
+          P2: LED_3 # DOUT
+          P3: GND
+          P4: LED_2 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c4_r1:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c4_r1/
+        params:
+          P1: VCC
+          P2: LED_4 # DOUT
+          P3: GND
+          P4: LED_3 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c5_r1:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c5_r1/
+        params:
+          P1: VCC
+          P2: LED_5 # DOUT
+          P3: GND
+          P4: LED_4 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c6_r1:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c6_r1/
+        params:
+          P1: VCC
+          P2: LED_6 # DOUT
+          P3: GND
+          P4: LED_5 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+#LED Reihe 2
+      underglow_led_c6_r2:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c6_r2/
+        params:
+          P1: VCC
+          P2: LED_7 # DOUT
+          P3: GND
+          P4: LED_6 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c5_r2:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c5_r2/
+        params:
+          P1: VCC
+          P2: LED_8 # DOUT
+          P3: GND
+          P4: LED_7 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c4_r2:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c4_r2/
+        params:
+          P1: VCC
+          P2: LED_9 # DOUT
+          P3: GND
+          P4: LED_8 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c3_r2:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c3_r2/
+        params:
+          P1: VCC
+          P2: LED_10 # DOUT
+          P3: GND
+          P4: LED_9 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+
+      underglow_led_c2_r2:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c2_r2/
+        params:
+          P1: VCC
+          P2: LED_11 # DOUT
+          P3: GND
+          P4: LED_10 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c1_r2:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c1_r2/
+        params:
+          P1: VCC
+          P2: LED_12 # DOUT
+          P3: GND
+          P4: LED_11 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+#LED Reihe 3
+      underglow_led_c1_r3:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c1_r3/
+        params:
+          P1: VCC
+          P2: LED_13 # DOUT
+          P3: GND
+          P4: LED_12 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c2_r3:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c2_r3/
+        params:
+          P1: VCC
+          P2: LED_14 # DOUT
+          P3: GND
+          P4: LED_13 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c3_r3:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c3_r3/
+        params:
+          P1: VCC
+          P2: LED_15 # DOUT
+          P3: GND
+          P4: LED_14 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c4_r3:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c4_r3/
+        params:
+          P1: VCC
+          P2: LED_16 # DOUT
+          P3: GND
+          P4: LED_15 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c5_r3:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c5_r3/
+        params:
+          P1: VCC
+          P2: LED_17 # DOUT
+          P3: GND
+          P4: LED_16 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c6_r3:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c6_r3/
+        params:
+          P1: VCC
+          P2: LED_18 # DOUT
+          P3: GND
+          P4: LED_17 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+#LED Reihe 4
+      underglow_led_c6_r4:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c6_r4/
+        params:
+          P1: VCC
+          P2: LED_19 # DOUT
+          P3: GND
+          P4: LED_18 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+
+      underglow_led_c5_r4:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c5_r4/
+        params:
+          P1: VCC
+          P2: LED_20 # DOUT
+          P3: GND
+          P4: LED_19 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c4_r4:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c4_r4/
+        params:
+          P1: VCC
+          P2: LED_21 # DOUT
+          P3: GND
+          P4: LED_20 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c3_r4:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c3_r4/
+        params:
+          P1: VCC
+          P2: LED_22 # DOUT
+          P3: GND
+          P4: LED_21 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c2_r4:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c2_r4/
+        params:
+          P1: VCC
+          P2: LED_23 # DOUT
+          P3: GND
+          P4: LED_22 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c1_r4:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c1_r4/
+        params:
+          P1: VCC
+          P2: LED_24 # DOUT
+          P3: GND
+          P4: LED_23 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+#LED Reihe 5
+      underglow_led_c1_r5:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c1_r5/
+        params:
+          P1: VCC
+          P2: LED_25 # DOUT
+          P3: GND
+          P4: LED_24 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+
+      underglow_led_c2_r5:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c2_r5/
+        params:
+          P1: VCC
+          P2: LED_26 # DOUT
+          P3: GND
+          P4: LED_25 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c3_r5:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c3_r5/
+        params:
+          P1: VCC
+          P2: LED_27 # DOUT
+          P3: GND
+          P4: LED_26 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c4_r5:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c4_r5/
+        params:
+          P1: VCC
+          P2: LED_28 # DOUT
+          P3: GND
+          P4: LED_27 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c5_r5:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c5_r5/
+        params:
+          P1: VCC
+          P2: LED_29 # DOUT
+          P3: GND
+          P4: LED_28 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_c6_r5:
+        what: ceoloide/led_sk6812mini-e
+        where: /mainmatrix_c6_r5/
+        params:
+          P1: VCC
+          P2: LED_30 # DOUT
+          P3: GND
+          P4: LED_29 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+#LEDs Daumen
+      underglow_led_th1:
+        what: ceoloide/led_sk6812mini-e
+        where: /thumbs_layer_cluster/
+        params:
+          P1: VCC
+          P2: LED_31 # DOUT
+          P3: GND
+          P4: LED_30 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+      underglow_led_th2:
+        what: ceoloide/led_sk6812mini-e
+        where: /thumbs_space_cluster/
+        params:
+          P1: VCC
+          P2: LED_32 # DOUT
+          P3: GND
+          P4: LED_31 # DIN
+          reversible: true
+          reverse_mount: false
+          include_traces_vias: true
+          include_courtyard: false
+        adjust:
+          shift: [0, sk_dy]
+
+      diodes_b:
+        what: ceoloide/diode_tht_sod123
+        where: [/thumbs_space_.*/, /thumbs_layer_.*/, /mainmatrix_c1_.*/, /mainmatrix_c2_.*/, /mainmatrix_c3_.*/, /mainmatrix_c4_.*/, /mainmatrix_c5_.*/, /mainmatrix_c6_.*/]
+        params:
+          from: "{{colrow}}"
+          to: "{{row}}"
+          include_tht: false
+          reversible: false
+          side: B
+        adjust:
+          rotate: 90
+          shift: [6.75,1]
+          resist: true
+      diodes_f:
+        what: ceoloide/diode_tht_sod123
+        where: [/thumbs_space_.*/, /thumbs_layer_.*/, /mainmatrix_c1_.*/, /mainmatrix_c2_.*/, /mainmatrix_c3_.*/, /mainmatrix_c4_.*/, /mainmatrix_c5_.*/, /mainmatrix_c6_.*/]
+        params:
+          from: "{{colrow}}"
+          to: "{{row}}"
+          include_tht: false
+          reversible: false
+          side: F
+        adjust:
+          rotate: 90
+          shift: [-6.75,1]
+          resist: true
