@@ -7660,13 +7660,13 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 203.2) (xy 248.92 205.74)
+			(xy 248.92 204.47) (xy 248.92 205.74)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0a45de9a-5e00-4b5a-a285-2b16e86ea213")
+		(uuid "09fc331d-488c-4c46-b1f6-071109bb5203")
 	)
 	(wire
 		(pts
