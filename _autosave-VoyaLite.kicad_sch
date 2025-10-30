@@ -3042,7 +3042,7 @@
 		(uuid "10a7b49a-6147-437a-b644-34c582c24f64")
 	)
 	(junction
-		(at 162.56 48.26)
+		(at 196.85 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "11fa0055-65c0-4d58-bc4c-60570a15c94b")
@@ -3054,7 +3054,7 @@
 		(uuid "147bc266-dfa7-4388-94ea-de74e4d5e0db")
 	)
 	(junction
-		(at 162.56 31.75)
+		(at 196.85 25.4)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "15864b7c-797e-4da0-856b-2828bb8b9c9b")
@@ -4267,7 +4267,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 48.26) (xy 162.56 49.53)
+			(xy 196.85 41.91) (xy 196.85 43.18)
 		)
 		(stroke
 			(width 0)
@@ -5197,7 +5197,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 48.26) (xy 162.56 48.26)
+			(xy 194.31 41.91) (xy 196.85 41.91)
 		)
 		(stroke
 			(width 0)
@@ -5537,7 +5537,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 30.48) (xy 162.56 31.75)
+			(xy 196.85 24.13) (xy 196.85 25.4)
 		)
 		(stroke
 			(width 0)
@@ -6327,7 +6327,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 48.26) (xy 162.56 43.18)
+			(xy 196.85 41.91) (xy 196.85 36.83)
 		)
 		(stroke
 			(width 0)
@@ -7437,7 +7437,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 31.75) (xy 162.56 35.56)
+			(xy 196.85 25.4) (xy 196.85 29.21)
 		)
 		(stroke
 			(width 0)
@@ -7897,7 +7897,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 31.75) (xy 162.56 31.75)
+			(xy 194.31 25.4) (xy 196.85 25.4)
 		)
 		(stroke
 			(width 0)
@@ -11580,7 +11580,7 @@
 	)
 	(symbol
 		(lib_id "Device:Battery_Cell")
-		(at 162.56 40.64 0)
+		(at 196.85 34.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11589,7 +11589,7 @@
 		(fields_autoplaced yes)
 		(uuid "0cc0978a-95e7-4cbf-ba79-8046c6689289")
 		(property "Reference" "BT1"
-			(at 166.37 37.5284 0)
+			(at 200.66 31.1784 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11598,7 +11598,7 @@
 			)
 		)
 		(property "Value" "Battery_Cell"
-			(at 166.37 40.0684 0)
+			(at 200.66 33.7184 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11607,7 +11607,7 @@
 			)
 		)
 		(property "Footprint" "Pia_Lib:Batteriehalter AAA_Metall"
-			(at 162.56 39.116 90)
+			(at 196.85 32.766 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11616,7 +11616,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 162.56 39.116 90)
+			(at 196.85 32.766 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11625,7 +11625,7 @@
 			)
 		)
 		(property "Description" "Single-cell battery"
-			(at 162.56 40.64 0)
+			(at 196.85 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13886,7 +13886,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x01_Pin")
-		(at 154.94 48.26 0)
+		(at 189.23 41.91 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13895,7 +13895,7 @@
 		(fields_autoplaced yes)
 		(uuid "33344ac3-09a2-49b9-bb4d-5fe9285d7d2b")
 		(property "Reference" "J2"
-			(at 155.575 43.18 0)
+			(at 189.865 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13903,7 +13903,7 @@
 			)
 		)
 		(property "Value" "Conn_01x01_Pin"
-			(at 155.575 45.72 0)
+			(at 189.865 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13911,7 +13911,7 @@
 			)
 		)
 		(property "Footprint" "RT-Library:Testpoint-pad"
-			(at 154.94 48.26 0)
+			(at 189.23 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13920,7 +13920,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 154.94 48.26 0)
+			(at 189.23 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13929,7 +13929,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 154.94 48.26 0)
+			(at 189.23 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20884,7 +20884,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x01_Pin")
-		(at 154.94 31.75 0)
+		(at 189.23 25.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -20893,7 +20893,7 @@
 		(fields_autoplaced yes)
 		(uuid "a3f9d33b-cc1b-4229-8317-f9fa84b924b4")
 		(property "Reference" "J1"
-			(at 155.575 26.67 0)
+			(at 189.865 20.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20901,7 +20901,7 @@
 			)
 		)
 		(property "Value" "Conn_01x01_Pin"
-			(at 155.575 29.21 0)
+			(at 189.865 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20909,7 +20909,7 @@
 			)
 		)
 		(property "Footprint" "RT-Library:Testpoint-pad"
-			(at 154.94 31.75 0)
+			(at 189.23 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20918,7 +20918,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 154.94 31.75 0)
+			(at 189.23 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20927,7 +20927,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 154.94 31.75 0)
+			(at 189.23 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22913,7 +22913,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 162.56 49.53 0)
+		(at 196.85 43.18 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22922,7 +22922,7 @@
 		(fields_autoplaced yes)
 		(uuid "cea23f17-a049-4ce3-bf4d-1805ff2e053c")
 		(property "Reference" "#PWR07"
-			(at 162.56 55.88 0)
+			(at 196.85 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22931,7 +22931,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 162.56 54.61 0)
+			(at 196.85 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22939,7 +22939,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 162.56 49.53 0)
+			(at 196.85 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22948,7 +22948,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 162.56 49.53 0)
+			(at 196.85 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22957,7 +22957,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 162.56 49.53 0)
+			(at 196.85 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23071,7 +23071,7 @@
 	)
 	(symbol
 		(lib_id "power:+BATT")
-		(at 162.56 30.48 0)
+		(at 196.85 24.13 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -23081,7 +23081,7 @@
 		(fields_autoplaced yes)
 		(uuid "cefe634c-ffef-4402-9f46-b8da13873398")
 		(property "Reference" "#PWR02"
-			(at 162.56 34.29 0)
+			(at 196.85 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23090,7 +23090,7 @@
 			)
 		)
 		(property "Value" "+BATT"
-			(at 162.56 25.4 0)
+			(at 196.85 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23098,7 +23098,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 162.56 30.48 0)
+			(at 196.85 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23107,7 +23107,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 162.56 30.48 0)
+			(at 196.85 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23116,7 +23116,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+BATT\""
-			(at 162.56 30.48 0)
+			(at 196.85 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
