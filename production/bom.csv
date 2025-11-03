@@ -1,0 +1,11 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+BT1,Batteriehalter AAA_Metall,1,Battery_Cell,
+"C1, C3, C45, C46",0402,4,100n,
+C2,0402,1,1u,
+C48,0603,1,10u,
+"J1, J2",Testpoint-pad,2,Conn_01x01_Pin,
+"Q1, Q2",TRANS_NTJD1155LT1G,2,NTJD1155LT1G,
+R10,0402,1,100K,
+"R6, R8, R9",0402,3,10K,
+"S1, S10, S11, S12, S13, S14, S15, S16, S17, S18, S19, S2, S20, S21, S22, S23, S24, S25, S26, S27, S28, S29, S3, S30, S31, S4, S5, S6, S7, S8, S9",Kailh_Low-Profile-Switch_17mm_one Side,31,~,
+U6,MCU_Seeed_nRF52840,1,XIAO-NRF82840-Plus,
